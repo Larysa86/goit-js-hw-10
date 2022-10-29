@@ -21,12 +21,14 @@ function onInput(evt) {
     refs.list.innerHTML = '';
     refs.info.innerHTML = '';
     return;
-  }
+  } else {
   fetchCountries(countryName)
     .then(addMarkUp)
     .catch(() =>
       Notiflix.Notify.failure('Oops, there is no country with that name')
     );
+  }
+  
 }
 
 function addMarkUp(data) {
@@ -44,18 +46,18 @@ function addMarkUp(data) {
       })
       .join('');
     return;
-  }
-  refs.list.innerHTML = '';
-  const country = data[0];
-  refs.info.innerHTML = `<div class = 'wrapper'><img src=${
-    country.flags.svg
-  } width = 40px, height = 25px></img><span class = 'name'>${
-    country.name.official
-  }</span></div>
+  } else {
+    refs.list.innerHTML = '';
+    const country = data[0];
+    refs.info.innerHTML = `<div class = 'wrapper'><img src=${country.flags.svg
+      } width = 40px, height = 25px></img><span class = 'name'>${country.name.official
+      }</span></div>
   <p>Capital: <span class = 'capital'>${country.capital}</span></p>
   <p>Population: <span class = 'population'>${country.population}</span></p>
   <p>Languages: <span class = 'languages'>${Object.values(
-    country.languages
-  )}</span></p>
+        country.languages
+      )}</span></p>
     `;
+  }
 }
+
